@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LTD.AI | خطة التنفيذ التقني</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f8fafc;
+        }
+        html[lang="en"] body {
+            font-family: 'Inter', sans-serif;
+        }
+       .gradient-bg {
+            background: linear-gradient(135deg, #073B4C, #118AB2);
+        }
+       .step-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+       .step-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+       .decision-point {
+            border-right: 4px solid #FFD166;
+       }
+       html[dir="ltr"] .decision-point {
+           border-right: none;
+           border-left: 4px solid #FFD166;
+       }
+       .timeline-connector {
+            position: relative;
+        }
+       .timeline-connector::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 2rem;
+            background-color: #118AB2;
+        }
+       .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s ease;
+        }
+       .checklist-item:hover {
+            background-color: #f1f5f9;
+        }
+       .checklist-item svg {
+            flex-shrink: 0;
+        }
+        .price-tag {
+            background-color: #e0f2fe;
+            color: #0c4a6e;
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+        .gradient-cta {
+            background: linear-gradient(90deg, #118AB2, #06D6A0);
+        }
+        .gradient-cta:hover {
+            background: linear-gradient(90deg, #06D6A0, #118AB2);
+        }
+    </style>
+</head>
+<body class="text-[#073B4C]">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <nav class="text-center mb-6">
+            <button id="lang-toggle" class="px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50">
+                English
+            </button>
+        </nav>
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-[#073B4C]" data-key="headerTitle">LTD.AI 🛠️</h1>
+            <p class="text-lg md:text-2xl mt-4 text-gray-600" data-key="headerSubtitle">خطتنا التقنية للتنفيذ: من الفكرة إلى الإطلاق في 8 أسابيع</p>
+        </header>
+
+        <main class="space-y-16">
+
+            <section id="timeline">
+                 <h2 class="text-3xl font-bold text-center mb-8" data-key="timelineTitle">الجدول الزمني للمشروع (8 أسابيع)</h2>
+                 <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="relative h-96">
+                        <canvas id="timelineChart"></canvas>
+                    </div>
+                 </div>
+            </section>
+
+            <section id="phase1">
+                <div class="text-center mb-8 timeline-connector">
+                    <span class="bg-[#073B4C] text-white font-bold py-2 px-4 rounded-full" data-key="phase1Title">المرحلة الأولى: البنية التحتية الأساسية (الأسبوع 1)</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="step-card bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 flex items-center"><span class="text-3xl mx-3">🌐</span> <span data-key="p1s1Title">شراء اسم النطاق</span></h3>
+                        <p class="text-gray-600" data-key="p1s1Desc">سنقوم باختيار اسم النطاق LTD.AI أو بديل مناسب، وسنستخدم خدمات مثل Namecheap أو GoDaddy.</p>
+                    </div>
+                    <div class="step-card bg-white rounded-lg shadow-lg p-6 decision-point">
+                        <h3 class="text-xl font-bold mb-4 flex items-center"><span class="text-3xl mx-3">☁️</span> <span data-key="p1s2Title">اختيار وتكوين الاستضافة</span></h3>
+                        <p class="text-gray-600 mb-4" data-key="p1s2Desc">هذا هو القرار الأكثر أهمية لسرعة الموقع في الشرق الأوسط.</p>
+                        <p class="font-bold text-green-600 mb-2" data-key="p1s2Rec">⭐ توصيتنا: Hostinger (خطة Business WooCommerce)</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li data-key="p1s2f1">خوادم **LiteSpeed** مع تخزين مؤقت LSCache.</li>
+                            <li data-key="p1s2f2">وحدات تخزين **NVMe SSD** فائقة السرعة.</li>
+                            <li data-key="p1s2f3">خوادم في الإمارات أو قريبة منها لضمان أقل زمن وصول.</li>
+                            <li data-key="p1s2f4">حماية من هجمات DDoS وشهادة SSL مجانية.</li>
+                        </ul>
+                        <span class="price-tag" data-key="p1s2Price">تبدأ من ~12 دولارًا شهريًا</span>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="phase2">
+                <div class="text-center mb-8 timeline-connector">
+                    <span class="bg-[#073B4C] text-white font-bold py-2 px-4 rounded-full" data-key="phase2Title">المرحلة الثانية: المنصة الأساسية (الأسبوع 1-2)</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="step-card bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 flex items-center"><span class="text-3xl mx-3">📦</span> <span data-key="p2s1Title">تثبيت WordPress و WooCommerce</span></h3>
+                        <p class="text-gray-600" data-key="p2s1Desc">سنستخدم أداة التثبيت بنقرة واحدة من مزود الاستضافة، وسنتبع معالج الإعداد الأولي لـ WooCommerce.</p>
+                    </div>
+                    <div class="step-card bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 flex items-center"><span class="text-3xl mx-3">🔧</span> <span data-key="p2s2Title">الإعداد الأولي للمتجر</span></h3>
+                        <p class="text-gray-600" data-key="p2s2Desc">سنقوم بتكوين المتجر لبيع المنتجات الرقمية فقط، مع تعطيل الشحن، وتحديد العملات (USD, AED, SAR).</p>
+                    </div>
+                    <div class="step-card bg-white rounded-lg shadow-lg p-6 decision-point">
+                        <h3 class="text-xl font-bold mb-4 flex items-center"><span class="text-3xl mx-3">🏪</span> <span data-key="p2s3Title">تثبيت إضافة السوق متعدد البائعين</span></h3>
+                        <p class="text-gray-600 mb-4" data-key="p2s3Desc">هذا هو محرك السوق الذي سيحول متجرنا إلى منصة متكاملة.</p>
+                        <p class="font-bold text-green-600 mb-2" data-key="p2s3Rec">⭐ توصيتنا: WCFM Marketplace</p>
+                        <p class="text-gray-600" data-key="p2s3Reason">يوفر مرونة أكبر، ميزات متقدمة في النسخة المجانية، وتكامل أعمق مقارنة بـ Dokan، مما يجعله الخيار الأفضل للتوسع المستقبلي.</p>
+                        <span class="price-tag" data-key="p2s3Price">الإصدار الأساسي مجاني</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="phase3">
+                <div class="text-center mb-8 timeline-connector">
+                    <span class="bg-[#073B4C] text-white font-bold py-2 px-4 rounded-full" data-key="phase3Title">المرحلة الثالثة: دمج الميزات الأساسية (الأسبوع 3-4)</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="step-card bg-white rounded-lg shadow-lg p-6 decision-point">
+                        <h3 class="text-xl font-bold mb-4 flex items-center"><span class="text-3xl mx-3">💳</span> <span data-key="p3s1Title">تكامل بوابة الدفع</span></h3>
+                         <p class="font-bold text-green-600 mb-2" data-key="p3s1Rec">⭐ توصيتنا: Paymob for WooCommerce</p>
+                        <p class="text-gray-600" data-key="p3s1Reason">هذه الإضافة ضرورية لدعم طرق الدفع المحلية في الإمارات والسعودية ومصر، وتوفر تجربة دفع مضمنة لزيادة التحويلات. سنضيف Stripe و PayPal كخيارات عالمية.</p>
+                        <span class="price-tag" data-key="p3s1Price">الإضافة مجانية (تطبق رسوم المعاملات)</span>
+                    </div>
+                    <div class="step-card bg-white rounded-lg shadow-lg p-6 decision-point">
+                        <h3 class="text-xl font-bold mb-4 flex items-center"><span class="text-3xl mx-3">🔑</span> <span data-key="p3s2Title">إدارة تراخيص البرامج</span></h3>
+                        <p class="font-bold text-green-600 mb-2" data-key="p3s2Rec">⭐ توصيتنا: Appsero (SaaS)</p>
+                        <p class="text-gray-600" data-key="p3s2Reason">منصة متكاملة تتيح للبائعين إدارة التراخيص، إرسال التحديثات، والحصول على تحليلات مفصلة. هذا يجعل منصتنا أكثر جاذبية للمطورين المحترفين.</p>
+                        <span class="price-tag" data-key="p3s2Price">تبدأ بخطة مجانية</span>
+                    </div>
+                    <div class="step-card bg-white rounded-lg shadow-lg p-6 decision-point">
+                        <h3 class="text-xl font-bold mb-4 flex items-center"><span class="text-3xl mx-3">🤝</span> <span data-key="p3s3Title">إدارة برنامج التسويق بالعمولة</span></h3>
+                        <p class="font-bold text-green-600 mb-2" data-key="p3s3Rec">⭐ توصيتنا: AffiliateWP</p>
+                        <p class="text-gray-600" data-key="p3s3Reason">الخيار الأقوى لإنشاء برنامج احترافي. يتيح لنا إنشاء هياكل عمولة متقدمة (مثل 100% للعملاء الجدد) لمحاكاة محرك نمو AppSumo.</p>
+                        <span class="price-tag" data-key="p3s3Price">تبدأ من 149.50 دولارًا سنويًا</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="phase4">
+                <div class="text-center mb-8 timeline-connector">
+                    <span class="bg-[#073B4C] text-white font-bold py-2 px-4 rounded-full" data-key="phase4Title">المرحلة الرابعة: تصميم تجربة المستخدم (الأسبوع 5-6)</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="step-card bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 flex items-center"><span class="text-3xl mx-3">🎨</span> <span data-key="p4s1Title">اختيار وتخصيص القالب</span></h3>
+                        <p class="font-bold text-green-600 mb-2" data-key="p4s1Rec">⭐ توصيتنا: WoodMart</p>
+                        <p class="text-gray-600" data-key="p4s1Reason">قالب سريع، يدعم اللغة العربية (RTL)، ومتوافق تمامًا مع WooCommerce و WCFM Marketplace. يوفر مكتبة ضخمة من القوالب الجاهزة التي سننطلق منها.</p>
+                        <span class="price-tag" data-key="p4s1Price">~59 دولارًا لمرة واحدة</span>
+                    </div>
+                    <div class="step-card bg-white rounded-lg shadow-lg p-6 decision-point md:col-span-2">
+                        <h3 class="text-xl font-bold mb-4 flex items-center"><span class="text-3xl mx-3">📄</span> <span data-key="p4s2Title">بناء قالب صفحة الصفقة (الأصل الأهم)</span></h3>
+                        <p class="text-gray-600 mb-6" data-key="p4s2Desc">هذا هو المحرك الأساسي للمبيعات. لن نستخدم صفحة المنتج الافتراضية. بدلاً من ذلك، سنعتمد على قالب مخصص وموحد لجميع البائعين.</p>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-bold text-green-600 mb-2" data-key="p4s2OptATitle">الخيار أ: أداة بناء متقدمة (للتوسع)</h4>
+                                <p class="font-semibold" data-key="p4s2OptARec">⭐ Bricks Builder</p>
+                                <p class="text-gray-600 text-sm mt-1" data-key="p4s2OptAReason">أداة بناء فائقة الأداء تمنحنا تحكمًا كاملاً للتعديلات المستقبلية وتأتي مع صفقة مدى الحياة.</p>
+                                <span class="price-tag mt-2" data-key="p4s2OptAPrice">249 دولارًا لمرة واحدة</span>
+                            </div>
+                            <div class="border-2 border-blue-500 rounded-lg p-4 bg-blue-50 relative">
+                                 <span class="absolute top-0 right-0 -mt-3 -mr-3 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full" data-key="p4s2OptBBadge">البديل المقترح</span>
+                                <h4 class="font-bold text-blue-600 mb-2" data-key="p4s2OptBTitle">الخيار ب: استخدام تصميمنا المخصص</h4>
+                                <p class="text-gray-600 text-sm mt-1" data-key="p4s2OptBReason">سنقوم بتطبيق القالب عالي التحويل الذي صممناه معًا مباشرةً، مما يلغي تكلفة أداة البناء في مرحلة الإطلاق.</p>
+                                <a href="javascript:void(0);" onclick="openDealTemplate()" class="inline-block mt-3 px-4 py-2 text-sm text-white font-bold rounded-lg gradient-cta transition-all duration-300" data-key="p4s2OptBButton">
+                                    عرض التصميم
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="step-card bg-white rounded-lg shadow-lg p-6 md:col-span-3">
+                        <h3 class="text-xl font-bold mb-4 flex items-center"><span class="text-3xl mx-3">⚙️</span> <span data-key="p4s3Title">تكوين لوحات التحكم</span></h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold" data-key="p4s3VendorTitle">لوحة تحكم البائع (Vendor Dashboard)</h4>
+                                <p class="text-gray-600" data-key="p4s3VendorDesc">سنقوم بتكوين لوحة تحكم WCFM لتوفير جميع الأدوات اللازمة: إدارة المنتجات، الطلبات، الكوبونات، التقارير، وإعدادات المتجر.</p>
+                            </div>
+                             <div>
+                                <h4 class="font-semibold" data-key="p4s3CustomerTitle">صفحة حساب العميل (My Account)</h4>
+                                <p class="text-gray-600" data-key="p4s3CustomerDesc">سنقوم بتخصيص صفحة "حسابي" لتكون واضحة، مع أقسام بارزة لـ "الطلبات" و "التنزيلات" للوصول السهل إلى رموز التفعيل.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="phase5">
+                <div class="text-center mb-8 timeline-connector">
+                    <span class="bg-[#073B4C] text-white font-bold py-2 px-4 rounded-full" data-key="phase5Title">المرحلة الخامسة: الإعداد القانوني والتشغيلي (الأسبوع 7)</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="step-card bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 flex items-center"><span class="text-3xl mx-3">⚖️</span> <span data-key="p5s1Title">إنشاء الصفحات القانونية</span></h3>
+                        <p class="text-gray-600 mb-4" data-key="p5s1Desc">سنستخدم قوالب كنقطة انطلاق، ولكن مع استشارة محامٍ متخصص في الإمارات.</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li data-key="p5s1f1">شروط الخدمة (للبائعين والمشترين).</li>
+                            <li data-key="p5s1f2">سياسة الخصوصية (توضح مشاركة البيانات).</li>
+                            <li data-key="p5s1f3">سياسة استرداد الأموال (60 يومًا لبناء الثقة).</li>
+                        </ul>
+                    </div>
+                    <div class="step-card bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 flex items-center"><span class="text-3xl mx-3">📝</span> <span data-key="p5s2Title">تجهيز عملية إعداد البائعين</span></h3>
+                        <p class="text-gray-600" data-key="p5s2Desc">سننشئ صفحة تسجيل مخصصة للبائعين عبر WCFM، مع إرشادات واضحة تشرح معايير الجودة وكيفية إعداد رموز التفعيل (Redemption Codes).</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="phase6">
+                <div class="text-center mb-8">
+                    <span class="bg-[#073B4C] text-white font-bold py-2 px-4 rounded-full" data-key="phase6Title">المرحلة السادسة: الاختبارات النهائية قبل الإطلاق (الأسبوع 8)</span>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-6 text-center" data-key="p6Title">قائمة التحقق النهائية لضمان إطلاق سلس</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                        <div class="checklist-item">
+                            <svg class="w-6 h-6 text-green-500 mx-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span data-key="p6c1">اختبار شامل لسير عمل الشراء والاسترداد.</span>
+                        </div>
+                        <div class="checklist-item">
+                            <svg class="w-6 h-6 text-green-500 mx-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span data-key="p6c2">اختبار تجربة البائع (إضافة منتج، عرض الطلبات).</span>
+                        </div>
+                        <div class="checklist-item">
+                            <svg class="w-6 h-6 text-green-500 mx-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span data-key="p6c3">فحص أداء وسرعة الموقع باستخدام GTmetrix.</span>
+                        </div>
+                        <div class="checklist-item">
+                            <svg class="w-6 h-6 text-green-500 mx-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span data-key="p6c4">التأكد من أن شهادة SSL تعمل على جميع الصفحات.</span>
+                        </div>
+                         <div class="checklist-item">
+                            <svg class="w-6 h-6 text-green-500 mx-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span data-key="p6c5">مراجعة استجابة الموقع على الأجهزة المحمولة.</span>
+                        </div>
+                        <div class="checklist-item">
+                            <svg class="w-6 h-6 text-green-500 mx-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span data-key="p6c6">التأكد من تحديث جميع الإضافات والقالب لآخر إصدار.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-16 pt-8 border-t border-gray-300">
+            <p class="text-gray-600" data-key="footerText">&copy; 2025 LTD.AI | بناء منصة قوية ومستدامة معًا.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                // Header
+                headerTitle: "LTD.AI 🛠️",
+                headerSubtitle: "Our Technical Execution Plan: From Idea to Launch in 8 Weeks",
+                // Timeline
+                timelineTitle: "Project Timeline (8 Weeks)",
+                timelineLabel: "Timeline (in Weeks)",
+                timelineXAxis: "Weeks",
+                timelineTask1: "Infrastructure",
+                timelineTask2: "Core Platform",
+                timelineTask3: "Feature Integration",
+                timelineTask4: "UX Design",
+                timelineTask5: "Legal Setup",
+                timelineTask6: "Final Testing",
+                // Phase 1
+                phase1Title: "Phase 1: Core Infrastructure (Week 1)",
+                p1s1Title: "Domain Name Purchase",
+                p1s1Desc: "We will choose the LTD.AI domain name or a suitable alternative, using services like Namecheap or GoDaddy.",
+                p1s2Title: "Hosting Selection & Configuration",
+                p1s2Desc: "This is the most critical decision for site speed in the Middle East.",
+                p1s2Rec: "⭐ Our Recommendation: Hostinger (Business WooCommerce Plan)",
+                p1s2f1: "**LiteSpeed** servers with LSCache.",
+                p1s2f2: "Ultra-fast **NVMe SSD** storage.",
+                p1s2f3: "Servers in or near the UAE for lowest latency.",
+                p1s2f4: "DDoS protection and free SSL certificate.",
+                p1s2Price: "Starts from ~$12/month",
+                // Phase 2
+                phase2Title: "Phase 2: Core Platform (Weeks 1-2)",
+                p2s1Title: "Install WordPress & WooCommerce",
+                p2s1Desc: "We'll use the hosting provider's one-click installer and follow the initial WooCommerce setup wizard.",
+                p2s2Title: "Initial Store Setup",
+                p2s2Desc: "We will configure the store to sell digital products only, disabling shipping and setting currencies (USD, AED, SAR).",
+                p2s3Title: "Install Multi-Vendor Marketplace Plugin",
+                p2s3Desc: "This is the marketplace engine that will turn our store into a full-fledged platform.",
+                p2s3Rec: "⭐ Our Recommendation: WCFM Marketplace",
+                p2s3Reason: "It offers greater flexibility, more advanced features in its free version, and deeper integrations compared to Dokan, making it the better choice for future scaling.",
+                p2s3Price: "Core version is free",
+                // Phase 3
+                phase3Title: "Phase 3: Integrating Core Features (Weeks 3-4)",
+                p3s1Title: "Payment Gateway Integration",
+                p3s1Rec: "⭐ Our Recommendation: Paymob for WooCommerce",
+                p3s1Reason: "This plugin is essential for supporting local payment methods in the UAE, KSA, and Egypt. It provides an embedded checkout experience to increase conversions. We'll add Stripe and PayPal as global options.",
+                p3s1Price: "Plugin is free (transaction fees apply)",
+                p3s2Title: "Software License Management",
+                p3s2Rec: "⭐ Our Recommendation: Appsero (SaaS)",
+                p3s2Reason: "An integrated platform allowing vendors to manage licenses, push updates, and get detailed analytics. This makes our platform more attractive to professional developers.",
+                p3s2Price: "Starts with a free plan",
+                p3s3Title: "Affiliate Program Management",
+                p3s3Rec: "⭐ Our Recommendation: AffiliateWP",
+                p3s3Reason: "The most robust option for creating a professional program. It allows us to create advanced commission structures (like 100% for new customers) to replicate AppSumo's growth engine.",
+                p3s3Price: "Starts from $149.50/year",
+                // Phase 4
+                phase4Title: "Phase 4: User Experience Design (Weeks 5-6)",
+                p4s1Title: "Theme Selection & Customization",
+                p4s1Rec: "⭐ Our Recommendation: WoodMart",
+                p4s1Reason: "A fast theme, supports RTL, and is fully compatible with WooCommerce and WCFM Marketplace. It provides a huge library of ready-made templates to start from.",
+                p4s1Price: "~$59 one-time",
+                p4s2Title: "Building the Deal Page Template (The Most Important Asset)",
+                p4s2Desc: "This is the primary sales driver. We will not use the default product page. Instead, we'll rely on a custom, unified template for all vendors.",
+                p4s2OptATitle: "Option A: Advanced Builder (for scaling)",
+                p4s2OptARec: "⭐ Bricks Builder",
+                p4s2OptAReason: "A hyper-performant builder that gives us full control for future modifications and comes with a lifetime deal.",
+                p4s2OptAPrice: "$249 one-time",
+                p4s2OptBBadge: "Proposed Alternative",
+                p4s2OptBTitle: "Option B: Use Our Custom Design",
+                p4s2OptBReason: "We will directly implement the high-conversion template we designed together, eliminating the cost of a builder at the launch stage.",
+                p4s2OptBButton: "View Design",
+                p4s3Title: "Configuring Dashboards",
+                p4s3VendorTitle: "Vendor Dashboard",
+                p4s3VendorDesc: "We will configure the WCFM dashboard to provide all necessary tools: product management, orders, coupons, reports, and store settings.",
+                p4s3CustomerTitle: "Customer Account Page (My Account)",
+                p4s3CustomerDesc: "We will customize the 'My Account' page to be clear, with prominent sections for 'Orders' and 'Downloads' for easy access to redemption codes.",
+                // Phase 5
+                phase5Title: "Phase 5: Legal & Operational Setup (Week 7)",
+                p5s1Title: "Creating Legal Pages",
+                p5s1Desc: "We will use templates as a starting point, but with consultation from a lawyer specializing in the UAE.",
+                p5s1f1: "Terms of Service (for vendors and buyers).",
+                p5s1f2: "Privacy Policy (clarifying data sharing).",
+                p5s1f3: "Refund Policy (60 days to build trust).",
+                p5s2Title: "Preparing Vendor Onboarding Process",
+                p5s2Desc: "We will create a custom vendor registration page via WCFM, with clear guidelines explaining quality standards and how to set up redemption codes.",
+                // Phase 6
+                phase6Title: "Phase 6: Final Pre-Launch Testing (Week 8)",
+                p6Title: "Final Checklist for a Smooth Launch",
+                p6c1: "End-to-end testing of the purchase and redemption workflow.",
+                p6c2: "Testing the vendor experience (adding a product, viewing orders).",
+                p6c3: "Checking site performance and speed with GTmetrix.",
+                p6c4: "Ensuring the SSL certificate is active on all pages.",
+                p6c5: "Reviewing mobile responsiveness.",
+                p6c6: "Ensuring all plugins and the theme are updated to the latest version.",
+                // Footer
+                footerText: "© 2025 LTD.AI | Building a strong and sustainable platform together."
+            },
+            ar: {
+                // Header
+                headerTitle: "LTD.AI 🛠️",
+                headerSubtitle: "خطتنا التقنية للتنفيذ: من الفكرة إلى الإطلاق في 8 أسابيع",
+                // Timeline
+                timelineTitle: "الجدول الزمني للمشروع (8 أسابيع)",
+                timelineLabel: "الجدول الزمني (بالأسابيع)",
+                timelineXAxis: "الأسابيع",
+                timelineTask1: "البنية التحتية",
+                timelineTask2: "المنصة الأساسية",
+                timelineTask3: "دمج الميزات",
+                timelineTask4: "تصميم UX",
+                timelineTask5: "الإعداد القانوني",
+                timelineTask6: "الاختبارات النهائية",
+                // Phase 1
+                phase1Title: "المرحلة الأولى: البنية التحتية الأساسية (الأسبوع 1)",
+                p1s1Title: "شراء اسم النطاق",
+                p1s1Desc: "سنقوم باختيار اسم النطاق LTD.AI أو بديل مناسب، وسنستخدم خدمات مثل Namecheap أو GoDaddy.",
+                p1s2Title: "اختيار وتكوين الاستضافة",
+                p1s2Desc: "هذا هو القرار الأكثر أهمية لسرعة الموقع في الشرق الأوسط.",
+                p1s2Rec: "⭐ توصيتنا: Hostinger (خطة Business WooCommerce)",
+                p1s2f1: "خوادم **LiteSpeed** مع تخزين مؤقت LSCache.",
+                p1s2f2: "وحدات تخزين **NVMe SSD** فائقة السرعة.",
+                p1s2f3: "خوادم في الإمارات أو قريبة منها لضمان أقل زمن وصول.",
+                p1s2f4: "حماية من هجمات DDoS وشهادة SSL مجانية.",
+                p1s2Price: "تبدأ من ~12 دولارًا شهريًا",
+                // Phase 2
+                phase2Title: "المرحلة الثانية: المنصة الأساسية (الأسبوع 1-2)",
+                p2s1Title: "تثبيت WordPress و WooCommerce",
+                p2s1Desc: "سنستخدم أداة التثبيت بنقرة واحدة من مزود الاستضافة، وسنتبع معالج الإعداد الأولي لـ WooCommerce.",
+                p2s2Title: "الإعداد الأولي للمتجر",
+                p2s2Desc: "سنقوم بتكوين المتجر لبيع المنتجات الرقمية فقط، مع تعطيل الشحن، وتحديد العملات (USD, AED, SAR).",
+                p2s3Title: "تثبيت إضافة السوق متعدد البائعين",
+                p2s3Desc: "هذا هو محرك السوق الذي سيحول متجرنا إلى منصة متكاملة.",
+                p2s3Rec: "⭐ توصيتنا: WCFM Marketplace",
+                p2s3Reason: "يوفر مرونة أكبر، ميزات متقدمة في النسخة المجانية، وتكامل أعمق مقارنة بـ Dokan، مما يجعله الخيار الأفضل للتوسع المستقبلي.",
+                p2s3Price: "الإصدار الأساسي مجاني",
+                 // Phase 3
+                phase3Title: "المرحلة الثالثة: دمج الميزات الأساسية (الأسبوع 3-4)",
+                p3s1Title: "تكامل بوابة الدفع",
+                p3s1Rec: "⭐ توصيتنا: Paymob for WooCommerce",
+                p3s1Reason: "هذه الإضافة ضرورية لدعم طرق الدفع المحلية في الإمارات والسعودية ومصر، وتوفر تجربة دفع مضمنة لزيادة التحويلات. سنضيف Stripe و PayPal كخيارات عالمية.",
+                p3s1Price: "الإضافة مجانية (تطبق رسوم المعاملات)",
+                p3s2Title: "إدارة تراخيص البرامج",
+                p3s2Rec: "⭐ توصيتنا: Appsero (SaaS)",
+                p3s2Reason: "منصة متكاملة تتيح للبائعين إدارة التراخيص، إرسال التحديثات، والحصول على تحليلات مفصلة. هذا يجعل منصتنا أكثر جاذبية للمطورين المحترفين.",
+                p3s2Price: "تبدأ بخطة مجانية",
+                p3s3Title: "إدارة برنامج التسويق بالعمولة",
+                p3s3Rec: "⭐ توصيتنا: AffiliateWP",
+                p3s3Reason: "الخيار الأقوى لإنشاء برنامج احترافي. يتيح لنا إنشاء هياكل عمولة متقدمة (مثل 100% للعملاء الجدد) لمحاكاة محرك نمو AppSumo.",
+                p3s3Price: "تبدأ من 149.50 دولارًا سنويًا",
+                // Phase 4
+                phase4Title: "المرحلة الرابعة: تصميم تجربة المستخدم (الأسبوع 5-6)",
+                p4s1Title: "اختيار وتخصيص القالب",
+                p4s1Rec: "⭐ توصيتنا: WoodMart",
+                p4s1Reason: "قالب سريع، يدعم اللغة العربية (RTL)، ومتوافق تمامًا مع WooCommerce و WCFM Marketplace. يوفر مكتبة ضخمة من القوالب الجاهزة التي سننطلق منها.",
+                p4s1Price: "~59 دولارًا لمرة واحدة",
+                p4s2Title: "بناء قالب صفحة الصفقة (الأصل الأهم)",
+                p4s2Desc: "هذا هو المحرك الأساسي للمبيعات. لن نستخدم صفحة المنتج الافتراضية. بدلاً من ذلك، سنعتمد على قالب مخصص وموحد لجميع البائعين.",
+                p4s2OptATitle: "الخيار أ: أداة بناء متقدمة (للتوسع)",
+                p4s2OptARec: "⭐ Bricks Builder",
+                p4s2OptAReason: "أداة بناء فائقة الأداء تمنحنا تحكمًا كاملاً للتعديلات المستقبلية وتأتي مع صفقة مدى الحياة.",
+                p4s2OptAPrice: "249 دولارًا لمرة واحدة",
+                p4s2OptBBadge: "البديل المقترح",
+                p4s2OptBTitle: "الخيار ب: استخدام تصميمنا المخصص",
+                p4s2OptBReason: "سنقوم بتطبيق القالب عالي التحويل الذي صممناه معًا مباشرةً، مما يلغي تكلفة أداة البناء في مرحلة الإطلاق.",
+                p4s2OptBButton: "عرض التصميم",
+                p4s3Title: "تكوين لوحات التحكم",
+                p4s3VendorTitle: "لوحة تحكم البائع (Vendor Dashboard)",
+                p4s3VendorDesc: "سنقوم بتكوين لوحة تحكم WCFM لتوفير جميع الأدوات اللازمة: إدارة المنتجات، الطلبات، الكوبونات، التقارير، وإعدادات المتجر.",
+                p4s3CustomerTitle: "صفحة حساب العميل (My Account)",
+                p4s3CustomerDesc: "سنقوم بتخصيص صفحة \"حسابي\" لتكون واضحة، مع أقسام بارزة لـ \"الطلبات\" و \"التنزيلات\" للوصول السهل إلى رموز التفعيل.",
+                 // Phase 5
+                phase5Title: "المرحلة الخامسة: الإعداد القانوني والتشغيلي (الأسبوع 7)",
+                p5s1Title: "إنشاء الصفحات القانونية",
+                p5s1Desc: "سنستخدم قوالب كنقطة انطلاق، ولكن مع استشارة محامٍ متخصص في الإمارات.",
+                p5s1f1: "شروط الخدمة (للبائعين والمشترين).",
+                p5s1f2: "سياسة الخصوصية (توضح مشاركة البيانات).",
+                p5s1f3: "سياسة استرداد الأموال (60 يومًا لبناء الثقة).",
+                p5s2Title: "تجهيز عملية إعداد البائعين",
+                p5s2Desc: "سننشئ صفحة تسجيل مخصصة للبائعين عبر WCFM، مع إرشادات واضحة تشرح معايير الجودة وكيفية إعداد رموز التفعيل (Redemption Codes).",
+                // Phase 6
+                phase6Title: "المرحلة السادسة: الاختبارات النهائية قبل الإطلاق (الأسبوع 8)",
+                p6Title: "قائمة التحقق النهائية لضمان إطلاق سلس",
+                p6c1: "اختبار شامل لسير عمل الشراء والاسترداد.",
+                p6c2: "اختبار تجربة البائع (إضافة منتج، عرض الطلبات).",
+                p6c3: "فحص أداء وسرعة الموقع باستخدام GTmetrix.",
+                p6c4: "التأكد من أن شهادة SSL تعمل على جميع الصفحات.",
+                p6c5: "مراجعة استجابة الموقع على الأجهزة المحمولة.",
+                p6c6: "التأكد من تحديث جميع الإضافات والقالب لآخر إصدار.",
+                // Footer
+                footerText: "© 2025 LTD.AI | بناء منصة قوية ومستدامة معًا."
+            }
+        };
+
+        let currentLang = 'ar';
+        let timelineChartInstance;
+
+        function openDealTemplate() {
+            // This function is kept as is, but a real implementation would also pass the currentLang
+            // to generate the template in the correct language.
+            const templateHtml = `
+            <!DOCTYPE html>
+            <html lang="ar" dir="rtl">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>LTD.AI | قالب صفحة الصفقة</title>
+                <script src="https://cdn.tailwindcss.com"><\/script>
+                <link rel="preconnect" href="https://fonts.googleapis.com">
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+                <style>
+                    body { font-family: 'Tajawal', sans-serif; }
+                    .gradient-cta { background: linear-gradient(90deg, #118AB2, #06D6A0); }
+                    .gradient-cta:hover { background: linear-gradient(90deg, #06D6A0, #118AB2); }
+                    .deal-highlight { background-color: #FFFAE5; border-right: 4px solid #FFD166; }
+                <\/style>
+            <\/head>
+            <body class="bg-gray-50">
+                <div class="sticky top-0 z-50 bg-white shadow-md p-4">
+                    <div class="container mx-auto flex justify-between items-center">
+                        <div><h2 class="text-lg font-bold text-gray-800">اسم المنتج: AI Writer Pro</h2><p class="text-sm text-gray-500">احصل على وصول مدى الحياة الآن!</p></div>
+                        <div class="flex items-center space-x-4 space-x-reverse"><span class="text-2xl font-bold text-[#073B4C]">$59</span><a href="#pricing" class="hidden md:inline-block px-6 py-2 text-white font-bold rounded-lg gradient-cta transition-all duration-300">اشترِ الآن</a></div>
+                    </div>
+                </div>
+                <div class="container mx-auto p-4 md:p-8">
+                    <main class="bg-white rounded-lg shadow-xl p-6 md:p-10">
+                        <section id="attention" class="text-center mb-12">
+                            <h1 class="text-3xl md:text-5xl font-extrabold text-[#073B4C] mb-4">أنشئ محتوى تسويقيًا احترافيًا بعشرة أضعاف السرعة باستخدام الذكاء الاصطناعي</h1>
+                            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">توقف عن إضاعة الوقت في التحديق في صفحة فارغة. دع AI Writer Pro يكتب لك نسخة إعلانية، مقالات، ورسائل بريد إلكتروني مقنعة في ثوانٍ.</p>
+                            <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-2xl max-w-4xl mx-auto mb-8"><img src="https://placehold.co/1280x720/073B4C/FFFFFF?text=فيديو+المنتج+هنا" alt="فيديو توضيحي للمنتج" class="w-full h-full object-cover"></div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                                <div class="text-center"><h3 class="text-xl font-bold text-[#118AB2]">🚀 زيادة الإنتاجية</h3><p class="text-gray-600 mt-2">حوّل أفكارك إلى محتوى مصقول في دقائق، وليس ساعات.</p></div>
+                                <div class="text-center"><h3 class="text-xl font-bold text-[#06D6A0]">💰 توفير التكاليف</h3><p class="text-gray-600 mt-2">استغنِ عن كتاب المحتوى باهظي الثمن وأدوات متعددة.</p></div>
+                                <div class="text-center"><h3 class="text-xl font-bold text-[#FFD166]">📈 تحسين التحويلات</h3><p class="text-gray-600 mt-2">اكتب نصوصًا إعلانية مقنعة تزيد من مبيعاتك.</p></div>
+                            </div>
+                        </section>
+                    </main>
+                </div>
+            </body>
+            <\/html>
+            `;
+            const blob = new Blob([templateHtml], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            window.open(url, '_blank');
+        }
+
+        function renderTimelineChart(lang) {
+            if (timelineChartInstance) {
+                timelineChartInstance.destroy();
+            }
+            const timelineCtx = document.getElementById('timelineChart').getContext('2d');
+            
+            const tasks = [
+                { key: 'timelineTask1', start: 1, end: 1.9 },
+                { key: 'timelineTask2', start: 1, end: 2.9 },
+                { key: 'timelineTask3', start: 3, end: 4.9 },
+                { key: 'timelineTask4', start: 5, end: 6.9 },
+                { key: 'timelineTask5', start: 7, end: 7.9 },
+                { key: 'timelineTask6', start: 8, end: 8.9 }
+            ];
+
+            const data = {
+                labels: tasks.map(task => translations[lang][task.key]),
+                datasets: [{
+                    label: translations[lang].timelineLabel,
+                    data: tasks.map(task => [task.start, task.end]),
+                    backgroundColor: ['rgba(239, 71, 111, 0.7)','rgba(255, 209, 102, 0.7)','rgba(6, 214, 160, 0.7)','rgba(17, 138, 178, 0.7)','rgba(7, 59, 76, 0.7)','rgba(255, 159, 64, 0.7)'],
+                    borderColor: ['rgb(239, 71, 111)','rgb(255, 209, 102)','rgb(6, 214, 160)','rgb(17, 138, 178)','rgb(7, 59, 76)','rgb(255, 159, 64)'],
+                    borderWidth: 1,
+                    barPercentage: 0.6,
+                    categoryPercentage: 0.8,
+                    borderSkipped: false,
+                    borderRadius: 5
+                }]
+            };
+
+            timelineChartInstance = new Chart(timelineCtx, {
+                type: 'bar',
+                data: data,
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            min: 0,
+                            max: 9,
+                            title: { display: true, text: translations[lang].timelineXAxis, font: { family: lang === 'ar' ? 'Tajawal' : 'Inter', size: 14 } },
+                            ticks: { stepSize: 1, font: { family: lang === 'ar' ? 'Tajawal' : 'Inter' } }
+                        },
+                        y: { ticks: { font: { family: lang === 'ar' ? 'Tajawal' : 'Inter', size: 14 } } }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            bodyFont: { family: lang === 'ar' ? 'Tajawal' : 'Inter' },
+                            titleFont: { family: lang === 'ar' ? 'Tajawal' : 'Inter' },
+                            callbacks: {
+                                label: function(context) {
+                                    const start = context.raw[0];
+                                    const end = context.raw[1] - 0.9;
+                                    if (lang === 'ar') {
+                                        return `الأسبوع ${start} إلى الأسبوع ${end.toFixed(0)}`;
+                                    }
+                                    return `Week ${start} to Week ${end.toFixed(0)}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+            
+            const toggleButton = document.getElementById('lang-toggle');
+            toggleButton.textContent = lang === 'ar' ? 'English' : 'العربية';
+
+            renderTimelineChart(lang);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langToggleButton = document.getElementById('lang-toggle');
+            langToggleButton.addEventListener('click', () => {
+                const newLang = currentLang === 'ar' ? 'en' : 'ar';
+                setLanguage(newLang);
+            });
+
+            // Initial load
+            setLanguage('ar');
+        });
+    </script>
+
+</body>
+</html>
