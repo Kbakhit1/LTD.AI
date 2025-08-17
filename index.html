@@ -77,6 +77,18 @@
         .gradient-cta:hover {
             background: linear-gradient(90deg, #06D6A0, #118AB2);
         }
+        .scroll-animate {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        html[dir="ltr"] .scroll-animate {
+            transform: translateX(-50px);
+        }
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
     </style>
 </head>
 <body class="text-[#073B4C]">
@@ -84,8 +96,9 @@
     <div class="container mx-auto p-4 md:p-8">
         
         <nav class="text-center mb-6">
-            <button id="lang-toggle" class="px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50">
-                English
+            <button id="lang-toggle" class="px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center mx-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m4 13l4-4M19 9l-4 4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span id="lang-toggle-text" class="mx-2">English</span>
             </button>
         </nav>
 
@@ -96,7 +109,7 @@
 
         <main class="space-y-16">
 
-            <section id="timeline">
+            <section id="timeline" class="scroll-animate">
                  <h2 class="text-3xl font-bold text-center mb-8" data-key="timelineTitle">الجدول الزمني للمشروع (8 أسابيع)</h2>
                  <div class="bg-white rounded-lg shadow-lg p-6">
                     <div class="relative h-96">
@@ -105,7 +118,7 @@
                  </div>
             </section>
 
-            <section id="phase1">
+            <section id="phase1" class="scroll-animate">
                 <div class="text-center mb-8 timeline-connector">
                     <span class="bg-[#073B4C] text-white font-bold py-2 px-4 rounded-full" data-key="phase1Title">المرحلة الأولى: البنية التحتية الأساسية (الأسبوع 1)</span>
                 </div>
@@ -129,7 +142,7 @@
                 </div>
             </section>
             
-            <section id="phase2">
+            <section id="phase2" class="scroll-animate">
                 <div class="text-center mb-8 timeline-connector">
                     <span class="bg-[#073B4C] text-white font-bold py-2 px-4 rounded-full" data-key="phase2Title">المرحلة الثانية: المنصة الأساسية (الأسبوع 1-2)</span>
                 </div>
@@ -152,7 +165,7 @@
                 </div>
             </section>
 
-            <section id="phase3">
+            <section id="phase3" class="scroll-animate">
                 <div class="text-center mb-8 timeline-connector">
                     <span class="bg-[#073B4C] text-white font-bold py-2 px-4 rounded-full" data-key="phase3Title">المرحلة الثالثة: دمج الميزات الأساسية (الأسبوع 3-4)</span>
                 </div>
@@ -178,7 +191,7 @@
                 </div>
             </section>
 
-            <section id="phase4">
+            <section id="phase4" class="scroll-animate">
                 <div class="text-center mb-8 timeline-connector">
                     <span class="bg-[#073B4C] text-white font-bold py-2 px-4 rounded-full" data-key="phase4Title">المرحلة الرابعة: تصميم تجربة المستخدم (الأسبوع 5-6)</span>
                 </div>
@@ -225,7 +238,7 @@
                 </div>
             </section>
 
-            <section id="phase5">
+            <section id="phase5" class="scroll-animate">
                 <div class="text-center mb-8 timeline-connector">
                     <span class="bg-[#073B4C] text-white font-bold py-2 px-4 rounded-full" data-key="phase5Title">المرحلة الخامسة: الإعداد القانوني والتشغيلي (الأسبوع 7)</span>
                 </div>
@@ -246,7 +259,7 @@
                 </div>
             </section>
             
-            <section id="phase6">
+            <section id="phase6" class="scroll-animate">
                 <div class="text-center mb-8">
                     <span class="bg-[#073B4C] text-white font-bold py-2 px-4 rounded-full" data-key="phase6Title">المرحلة السادسة: الاختبارات النهائية قبل الإطلاق (الأسبوع 8)</span>
                 </div>
@@ -610,8 +623,8 @@
                 }
             });
             
-            const toggleButton = document.getElementById('lang-toggle');
-            toggleButton.textContent = lang === 'ar' ? 'English' : 'العربية';
+            const toggleButtonText = document.getElementById('lang-toggle-text');
+            toggleButtonText.textContent = lang === 'ar' ? 'English' : 'العربية';
 
             renderTimelineChart(lang);
         }
@@ -621,6 +634,20 @@
             langToggleButton.addEventListener('click', () => {
                 const newLang = currentLang === 'ar' ? 'en' : 'ar';
                 setLanguage(newLang);
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.scroll-animate').forEach(section => {
+                observer.observe(section);
             });
 
             // Initial load
